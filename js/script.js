@@ -15,7 +15,7 @@ let resultAPI;
 /* EVENTLISTENERS */
 addEventListeners()
 function addEventListeners(){
-    amount.addEventListener('blur', leerValor);
+    amount.addEventListener('keyup', leerValor);
     btnConversor.addEventListener('click', conversor);
 }
 
