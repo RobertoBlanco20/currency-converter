@@ -13,3 +13,27 @@ h1{
     border: 1px solid #fff;
     font-weight: 800
 }
+
+.card{
+    background-color: #9f4a54;
+    border: 1px solid #fff;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 250px;
+}
+
+.card-one{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/UYU.jpg);
+}
+
+.card-two{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/BRL.jpg);
+}
+
+
+@media (min-width: 900px){
+    div[class="w-50"]{
+        width: 100%;
+    }
+}
