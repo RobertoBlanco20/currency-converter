@@ -1,13 +1,18 @@
+/* VARIABLES SELECTORAS */
+
 const amount = document.querySelector('.amount');
 const base = document.querySelector('.first-currency');
 const foreignCurrency = document.querySelector('.second-currency');
 const boxs = document.querySelector('.boxs');
 const btnConversor = document.querySelector('#btn');
-let amountNum;
 
+
+/* VARIABLES INFORMACION */
+let amountNum;
 let resultAPI;
 
 
+/* EVENTLISTENERS */
 addEventListeners()
 function addEventListeners(){
     amount.addEventListener('blur', leerValor);
@@ -15,6 +20,7 @@ function addEventListeners(){
 }
 
 
+/* FUNCIONES */
 function leerValor(e){
     amountNum = Number.parseInt(e.target.value);
 
@@ -22,14 +28,13 @@ function leerValor(e){
         btnConversor.disabled = false;
     } else {
         btnConversor.disabled = true;
+        btnConversor.style.opacity = 50;
   
     }
 }
 
 function conversor(e){
     e.preventDefault();
-
-
     
     if(base.value !== foreignCurrency.value){
         fetch(`https://api.exchangerate.host/convert?from=${base.value}&to=${foreignCurrency.value}`)
@@ -39,11 +44,11 @@ function conversor(e){
             } )
             .then( datos => {
                 resultAPI = datos.result;
-
                 resultAPI = resultAPI * amountNum;
 
                 printBase(amountNum);
                 printForeign(resultAPI);
+                resetAmount();
             })
     } 
 }
@@ -72,20 +77,21 @@ function printForeign( secondResult ){
     divTwo.classList.add('card', 'card-two', 'col-12', 'col-md-5', 'offset-md-2', 'mt-5');
 
     divTwo.innerHTML = `<div class="card-body mt-4">
-    <h5 class="card-title text-center fs-1 mt-5">$ <span>${secondResult}</span></h5>
+    <h5 class="card-title text-center fs-1 mt-5">$ <span>${Math.round(secondResult * 100) / 100
+    }</span></h5>
     <h6 class="card-subtitle mb-2 text-muted text-center fs-3">MONEDA</h6>
  </div>`;
 
-   divTwo.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/${foreignCurrency.value}.jpg)`
+   divTwo.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/${foreignCurrency.value}.jpg)`;
 
     boxs.appendChild(divTwo)  
 
+
 }
 
+function resetAmount(){
+    amount.value = '';
+    btnConversor.disabled = true;
+    btnConversor.style.opacity = 50;
+}
 
-
-// FALTA: 
-// 1) MENSAJE DE ERROR SI LE DAN A CONVERTIR SI TIENE LA MISMA MONEDA O SI NO TIENE IMPORTE
-// 2) RESETEAR EL AMOUNT UN VEZ ENVIADO
-// 3) NO PERMITIR QUE SE ENVIE MAS DE DOS CARDS A LA VEZ.
-// 4) REDONDEAR LOS MONTOS
