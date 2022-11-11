@@ -6,9 +6,6 @@ const foreignCurrency = document.querySelector('.second-currency');
 const boxs = document.querySelector('.boxs');
 const btnConversor = document.querySelector('#btn');
 
-let boxArray = [];
-
-
 /* VARIABLES INFORMACION */
 let amountNum;
 let resultAPI;
@@ -54,8 +51,6 @@ function conversor(e){
     } 
 }
 
-
-
 function printBase(firstResult){
     
     const theBox = document.querySelector('.boxs > div');
@@ -63,12 +58,15 @@ function printBase(firstResult){
          if(theBox != null){
             theBox.remove()
         }
+
+    console.log(boxs)
+
     
     let divOne = document.createElement('div');
     divOne.classList.add('card', 'card-one', 'col-12', 'col-md-5', 'mt-5')
 
     divOne.innerHTML = `<div class="card-body mt-4">
-    <h5 class="card-title text-center fs-1 mt-5">$ <span>${firstResult}</span></h5>
+    <h5 class="card-title text-center fs-1 mt-5">${base.name} <span>${firstResult}</span></h5>
     <h6 class="card-subtitle mb-2 text-muted text-center fs-3">${base.value}</h6>
   </div>`
 
@@ -91,7 +89,7 @@ function printForeign( secondResult ){
     divTwo.classList.add('card', 'card-two', 'col-12', 'col-md-5', 'offset-md-2', 'mt-5');
 
     divTwo.innerHTML = `<div class="card-body mt-4">
-    <h5 class="card-title text-center fs-1 mt-5">$ <span>${Math.round(secondResult * 100) / 100
+    <h5 class="card-title text-center fs-1 mt-5">${foreignCurrency.name} <span>${Math.round(secondResult * 100) / 100
     }</span></h5>
     <h6 class="card-subtitle mb-2 text-muted text-center fs-3">${foreignCurrency.value}</h6>
  </div>`;
@@ -106,4 +104,3 @@ function resetAmount(){
     btnConversor.disabled = true;
     btnConversor.style.opacity = 50;
 }
-

@@ -21,6 +21,7 @@ h1{
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 250px;
+    margin: 0 0 6em 0;
 }
 
 .card-one{
